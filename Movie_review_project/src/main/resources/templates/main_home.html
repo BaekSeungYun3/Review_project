@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layouts/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-
-</script>
-<style type="text/css">
-
-</style>
+    <meta charset="UTF-8">
+    <title>Main Home</title>
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/cover/">
+    <!-- layout.css 연결 -->
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
 </head>
 <body>
-<div layout:fragment="content">
-
-<h1>HOME</h1>
-<th:block th:if="${session.mdto==null}">
-	<p>
-		<a href="/user/login">SignIn</a>
-		<a href="/user/addUser">SignUp</a>
-	</p>
-</th:block>
-<th:block th:unless="${session.mdto==null}">
-	<p>
-		<span th:text="${session.mdto.role}"></span>
-		<span th:text="${session.mdto.id}"></span>
-		<a href="/user/logout">로그아웃</a>
-	</p>
-</th:block>
-	<p><a href="/board/boardList"></a></p>
-</div>
+    <!-- 배경이 적용되는 메인 홈 div -->
+    <div class="main_home">
+        <div class="content">
+            <h1>Movie Review</h1>
+            <th:block th:if="${session.mdto == null}">
+                <p>
+                    <a href="/user/login">SignIn</a>
+                    <a href="/user/addUser">SignUp</a>
+                </p>
+            </th:block>
+            <th:block th:unless="${session.mdto == null}">
+                <p>
+                    <span th:text="${session.mdto.role}"></span>
+                    <span th:text="${session.mdto.id}"></span>
+                    <a href="/user/logout">로그아웃</a>
+                </p>
+            </th:block>
+            <p><a href="/board/boardList">Here</a></p>
+        </div>
+    </div>
+<!-- 	<div th:replace="~{fragments/header::header}"></div> -->
+	<div layout:fragment="content" class="content"></div>
+	<div th:replace="~{fragments/footer::footer}"></div>
 </body>
 </html>
-
-
-
-
-
-
-

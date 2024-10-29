@@ -11,8 +11,8 @@
 	}
 	
 #footer{
-		background-color: #3c3c3c;
-		color:white;
+		background-color: #f8f9fa;
+		color:black;
 		line-height: 50px;
 		height: 50px;
 		text-align: center;
@@ -22,3 +22,14 @@
 	color : red;
 }	
 
+/* 메인 홈 배경 스타일 */
+.main_home {
+    background-image: url('../img/Logo.jpg'); /* 이미지 경로 설정 */
+    background-size: contain; /* 배경 이미지가 영역을 꽉 채우도록 */
+    background-position: center; /* 중앙 정렬 */
+    margin: 0; /* 기본 마진 제거 */
+    height: 100vh; /* 화면 전체 높이 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
