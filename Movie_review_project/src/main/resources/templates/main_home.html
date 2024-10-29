@@ -5,33 +5,72 @@
 <head>
     <meta charset="UTF-8">
     <title>Main Home</title>
-    <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/cover/">
-    <!-- layout.css 연결 -->
-    <link rel="stylesheet" type="text/css" href="/css/layout.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); /* 부드러운 파스텔 배경 */
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin: 10px;
+        }
+        a:hover {
+            color: #fa5252;
+        }
+        .btn {
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #fa5252;
+        }
+    </style>
 </head>
 <body>
-    <!-- 배경이 적용되는 메인 홈 div -->
-    <div class="main_home">
-        <div class="content">
-            <h1>Movie Review</h1>
-            <th:block th:if="${session.mdto == null}">
-                <p>
-                    <a href="/user/login">SignIn</a>
-                    <a href="/user/addUser">SignUp</a>
-                </p>
-            </th:block>
-            <th:block th:unless="${session.mdto == null}">
-                <p>
-                    <span th:text="${session.mdto.role}"></span>
-                    <span th:text="${session.mdto.id}"></span>
-                    <a href="/user/logout">로그아웃</a>
-                </p>
-            </th:block>
-            <p><a href="/board/boardList">Here</a></p>
-        </div>
+    <div class="content">
+        <h1>😸 내 반려견,반려묘를 소개합니다 🐶</h1>
+        <th:block th:if="${session.mdto == null}">
+            <p>
+                <a href="/user/login" class="btn">Sign In</a>
+                <a href="/user/addUser" class="btn">Sign Up</a>
+            </p>
+        </th:block>
+        <th:block th:unless="${session.mdto == null}">
+            <p>
+                <span th:text="${session.mdto.role}"></span>님 환영합니다!
+                <span th:text="${session.mdto.id}"></span>
+                <a href="/user/logout" class="btn">로그아웃</a>
+            </p>
+        </th:block>
+        <p><a href="/board/boardList" class="btn">게시판 가기</a></p>
     </div>
-<!-- 	<div th:replace="~{fragments/header::header}"></div> -->
-	<div layout:fragment="content" class="content"></div>
-	<div th:replace="~{fragments/footer::footer}"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
