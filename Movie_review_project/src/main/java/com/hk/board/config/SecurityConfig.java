@@ -45,7 +45,7 @@ public class SecurityConfig {
 //		         .failureUrl("/members/login/error")
 //		         .permitAll()
 //				 )
-		
+		//안니용
 		// 기능 비활성화
 		http.cors(AbstractHttpConfigurer::disable) 
 		    .csrf(AbstractHttpConfigurer::disable) // cors,csrf 비활성화
