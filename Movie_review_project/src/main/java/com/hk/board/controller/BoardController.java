@@ -1,3 +1,4 @@
+
 package com.hk.board.controller;
 
 import java.io.IOException;
@@ -130,17 +131,3 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
