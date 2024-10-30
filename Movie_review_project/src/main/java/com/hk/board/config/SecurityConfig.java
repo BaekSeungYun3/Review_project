@@ -45,22 +45,20 @@ public class SecurityConfig {
 //		         .failureUrl("/members/login/error")
 //		         .permitAll()
 //				 )
-		//안니용
+		//안니용!
 		// 기능 비활성화
 		http.cors(AbstractHttpConfigurer::disable) 
 		    .csrf(AbstractHttpConfigurer::disable) // cors,csrf 비활성화
 		    .formLogin(AbstractHttpConfigurer::disable);//loginform 비활성화
-		.authorizeHttpRequests(request -> request
-                .requestMatchers("/css/**", "/js/**", "/img/**", "/", "/user/login", "/user/addUser").permitAll() // 정적 리소스 및 특정 경로 허용
-                .anyRequest().authenticated() // 그 외의 요청은 인증 필요
-            )
-            .formLogin(login -> login
-                .loginPage("/user/login") // 사용자 정의 로그인 페이지
-                .defaultSuccessUrl("/", true) // 로그인 성공 시 이동할 페이지
-                .usernameParameter("id") // 로그인 파라미터 설정
-                .failureUrl("/user/login?error=true") // 로그인 실패 시 이동할 페이지
-                .permitAll()
-            );
+		/*
+		 * authorizeHttpRequests(request -> request .requestMatchers("/css/**",
+		 * "/js/**", "/img/**", "/", "/user/login", "/user/addUser").permitAll() // 정적
+		 * 리소스 및 특정 경로 허용 .anyRequest().authenticated() // 그 외의 요청은 인증 필요 )
+		 * formLogin(login -> login .loginPage("/user/login") // 사용자 정의 로그인 페이지
+		 * .defaultSuccessUrl("/", true) // 로그인 성공 시 이동할 페이지 .usernameParameter("id") //
+		 * 로그인 파라미터 설정 .failureUrl("/user/login?error=true") // 로그인 실패 시 이동할 페이지
+		 * .permitAll() );
+		 */
 
         return http.build();
     }
