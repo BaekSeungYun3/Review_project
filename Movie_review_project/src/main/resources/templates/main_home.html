@@ -1,44 +1,55 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Main Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>메인 홈</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Arial', sans-serif;
-        }
+        background-color: #ffd1dc; /* 헤더와 유사한 파스텔 핑크 */
+        height: 100vh;
+        margin: 0;
+        font-family: 'Nanum Gothic', sans-serif;
+    }
+
         .content {
+            margin-top: 100px;
             background-color: #ffffff;
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+
         h1 {
-            color: #ff6b6b;
+            color: #ff87ab;
             margin-bottom: 20px;
         }
+
         a {
             text-decoration: none;
             color: #ff6b6b;
             font-weight: bold;
             margin: 10px;
         }
+
         a:hover {
             color: #fa5252;
         }
+
+        .header {
+            background-color: rgb(255, 244, 248);
+        }
+
+        .header-brand {
+            color: #ff6b6b;
+            font-weight: normal;
+        }
+
         .btn {
             background-color: #ff6b6b;
             color: white;
@@ -46,38 +57,127 @@
             padding: 10px 20px;
             margin-top: 15px;
         }
+
         .btn:hover {
             background-color: #fa5252;
-        }
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
         }
     </style>
 </head>
 <body>
+
+<!-- 네비게이션 바 -->
+<header>
+  <div class="collapse bg-pastel" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-dark">🐱🐶</h4>
+          <p class="text-muted">반려동물과의 소중한 추억을 나누는 사이트입니다. 다양한 동물친구들의 이야기와 행복한 일상을 공유해봐요:)</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-dark">📞 . . manager</h4>
+          <ul class="list-unstyled">
+            <li><a class="text-muted">문의사항은 하단 링크를 통해 연락주세요.</a></li>
+            <li><a href="mailto:euoni2926@gmail.com" class="text-muted">Email me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#ff6b6b" 
+             stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="me-2" 
+             viewBox="0 0 24 24">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+        <strong>냐옹아 멍멍해봐</strong>
+      </a>
+<!-- 로그인 / 로그아웃 버튼 -->
+<ul class="navbar-nav d-flex flex-row ms-auto align-items-center">
+  <li class="nav-item" th:if="${session.mdto == null}">
+    <a class="nav-link" th:href="@{/user/login}">🔑 로그인</a>
+  </li>
+  <li class="nav-item" th:if="${session.mdto != null}">
+    <a class="nav-link" th:href="@{/user/logout}">🚪 로그아웃</a>
+  </li>
+</ul>
+<!-- 메뉴 바 -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" 
+              aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<main>
     <div class="content">
-        <h1>😸 내 반려견, 반려묘를 소개합니다 🐶</h1>
-
-        <th:block th:if="${session.mdto == null}">
-            <p>
-                <a href="/user/login" class="btn">Sign In</a>
-                <a href="/user/addUser" class="btn">Sign Up</a>
-            </p>
-        </th:block>
-
-        <th:block th:unless="${session.mdto == null}">
+        <h1>🐱 내 반려동물을 자랑해요 🐶</h1>
+		<th:block th:unless="${session.mdto == null}">
             <p>
                 <span th:text="' ' + ${session.mdto.name} + ' 님, 환영합니다!'"></span>
             </p>
-            <div class="btn-group">
-                <a href="/board/boardList" class="btn">게시판 가기</a>
-                <a href="/user/logout" class="btn btn-outline-danger">로그아웃</a>
-            </div>
+	        <p th:text="${session.mdto != null ? '자신의 반려동물 사진과 관련된 에피소드를 함께 공유해요!' : '로그인 후 다양한 반려동물 게시글을 확인하고, 자신의 반려동물 이야기를 나눠보세요!'}"></p>
         </th:block>
+        <p>
+            <a href="/board/boardList" class="btn">게시판 보기</a>
+            <a href="/user/addUser" class="btn" th:if="${session.mdto == null}">회원가입</a>
+        </p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 갤러리 카드 --> 
+<!-- <div class="album py-5 bg-light" th:if="${session.mdto != null}"> -->
+<!--     <div class="container"> -->
+<!--         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
+<!--             <div th:each="photo : ${photoList}" class="col"> -->
+<!--                 <div class="card shadow-sm"> -->
+<!--                     <img th:src="@{/upload/{filename}(filename=${photo.filename})}" -->
+<!--                          class="card-img-top" width="100%" height="225" -->
+<!--                          alt="반려동물 사진" /> -->
+<!--                     <div class="card-body"> -->
+<!--                         <p class="card-text" th:text="${photo.description}">사진 설명</p> -->
+<!--                         <div class="d-flex justify-content-between align-items-center"> -->
+<!--                             <small class="text-muted" th:text="${photo.uploadTime}">업로드 시간</small> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- </div> -->
+</main>
+<footer class="text-muted py-5 fixed-bottom">
+  <div class="container text-center">
+    <p class="mb-1">Album is &copy; 냐옹아 멍멍해봐, All sources are on this site, so please do not distribute or share.</p>
+  </div>
+</footer>
+
+<!-- CSS (추가) -->
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
+  }
+
+  footer {
+    background-color: #f8f9fa;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

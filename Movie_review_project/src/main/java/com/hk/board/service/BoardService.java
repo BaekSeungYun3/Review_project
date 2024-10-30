@@ -97,4 +97,7 @@ public class BoardService {
     public boolean mulDel(String[] seqs) {
         return boardMapper.mulDel(seqs);
     }
+//    public List<FileBoardDto> getAllUploadedPhotos() {
+//        return fileBoardRepository.findAll(); // 업로드된 파일 전체 조회
+//    }
 }

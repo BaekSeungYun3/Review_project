@@ -15,6 +15,7 @@ public class HomeController {
 		logger.info("HOME페이지이동");
 		return "main_home";
 	}
+	
 }
 
 
