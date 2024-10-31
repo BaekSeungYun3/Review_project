@@ -54,21 +54,10 @@ public class BoardService {
 
         // 4. 첨부된 파일이 있는 경우에만 처리
         if (!multipartRequest.getFiles("filename").get(0).isEmpty()) {
-            // 5. 파일 저장 경로 설정 (절대경로)
-            String filepath = request.getSession().getServletContext().getRealPath("upload");
-            System.out.println("파일 저장 경로: " + filepath);
+            // 5. 파일 업로드 수행 (FileService에서 처리) 및 파일 정보 반환
+            List<FileBoardDto> uploadFileList = fileService.uploadFiles(multipartRequest);
 
-            // **경로가 없으면 디렉터리 생성**
-            File dir = new File(filepath);
-            if (!dir.exists()) {
-                dir.mkdirs(); // 경로가 없으면 생성
-                System.out.println("경로가 존재하지 않아 새로 생성했습니다.");
-            }
-
-            // 6. 파일 업로드 수행 (FileService에서 처리) 및 파일 정보 반환
-            List<FileBoardDto> uploadFileList = fileService.uploadFiles(filepath, multipartRequest);
-
-            // 7. 업로드된 파일 정보를 DB에 저장
+            // 6. 업로드된 파일 정보를 DB에 저장
             for (FileBoardDto fDto : uploadFileList) {
                 fileMapper.insertFileBoard(
                     new FileBoardDto(0, boardDto.getBoard_seq(),  // 증가된 board_seq 사용
@@ -97,7 +86,4 @@ public class BoardService {
     public boolean mulDel(String[] seqs) {
         return boardMapper.mulDel(seqs);
     }
-//    public List<FileBoardDto> getAllUploadedPhotos() {
-//        return fileBoardRepository.findAll(); // 업로드된 파일 전체 조회
-//    }
 }
