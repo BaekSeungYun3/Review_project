@@ -130,5 +130,9 @@ public class BoardController {
 		System.out.println("글삭제함");
 		return "redirect:/board/boardList";
 	}
+	@GetMapping("/board/photo")
+    public String showPhotoPage() {
+        return "board/photo"; // templates/gallery/photo.html 경로로 연결
+    }
 }
 
